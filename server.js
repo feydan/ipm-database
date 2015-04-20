@@ -21,8 +21,8 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+var path = 'data/example/';
 var files = {
-	path: 'data/',
 	plants: 'plants.json',
 	insects: 'insects.json',
 	interactions: 'interactions.json',
@@ -30,9 +30,9 @@ var files = {
 
 app.get('/data', function(req, res) {
   var data = {};
-  data.plants = JSON.parse(fs.readFileSync(files.path+files.plants));
-  data.insects = JSON.parse(fs.readFileSync(files.path+files.insects));
-  data.interactions = JSON.parse(fs.readFileSync(files.path+files.interactions));
+  data.plants = JSON.parse(fs.readFileSync(path+files.plants));
+  data.insects = JSON.parse(fs.readFileSync(path+files.insects));
+  data.interactions = JSON.parse(fs.readFileSync(path+files.interactions));
   //console.log(data);
   res.setHeader('Content-Type', 'application/json');
   res.send(data);
@@ -42,19 +42,20 @@ app.get('/data', function(req, res) {
 
 var handleInput = function(req, res, inputType){
   /*PUT SOME INPUT VALIDATION HURRR*/
-  data = JSON.parse(fs.readFileSync(files.path+files[inputType]));
+  fs.readFile(path+files[inputType], function (err, data) {
+    data = JSON.parse(data);
+    var inputObj = req.body;
+    if(inputType == "interactions"){
+      data.push([inputObj.data]);
+    } else {
+      data[inputObj.inputName] = inputObj.data;
+    }
 
-  var inputObj = req.body;
-  if(inputType == "interactions"){
-  	data.push([inputObj.data]);
-  } else {
-  	data[inputObj.inputName] = inputObj.data;
-  }
-
-  fs.writeFile(files.path+files[inputType], JSON.stringify(data, null, 4), function(err) {
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.send(JSON.stringify(data));
+    fs.writeFile(path+files[inputType], JSON.stringify(data, null, 4), function(err) {
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.send(JSON.stringify(data));
+    });
   });
 }
 
