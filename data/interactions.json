@@ -1,0 +1,16 @@
+[
+	{
+		"plant": "Green Bell Pepper",
+		"insect": "Blister Beetle",
+		"relationship": "negative",
+		"description": "Adults feed on pepper plants",
+		"source_url": "http://www.rodalesorganiclife.com/garden/top-10-most-common-pepper-pests-and-diseases"
+	},
+	{
+		"plant": "Green Bell Pepper",
+		"insect": "Cutworm",
+		"relationship": "negative",
+		"description": "Eats seedling stems at night",
+		"source_url": "http://www.rodalesorganiclife.com/garden/top-10-most-common-pepper-pests-and-diseases"
+	}
+]
