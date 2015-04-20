@@ -1,48 +1,11 @@
-var converter = new Showdown.converter();
+var React = require('react');
+var PlantsBox = require('./PlantsBox');
+var InsectsBox = require('./InsectsBox');
+var InteractionsBox = require('./InteractionsBox');
+var $ = require('../jquery.min.js');
 
-var InputForm = React.createClass({
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var input = {
-      type: this.refs.inputType.getDOMNode().value.trim(),
-      data: {}
-    };
-    delete this.refs.inputType;
-
-    if(this.refs.hasOwnProperty("inputName")){
-      input.inputName = this.refs.inputName.getDOMNode().value.trim();
-      delete this.refs.inputName;
-    }
-
-    for(var field in this.refs){
-      input.data[field] = this.refs[field].getDOMNode().value.trim();
-    }
-    console.log(this.props.onInputSubmit);
-
-    this.props.onInputSubmit(input);
-  },
-  render: function() {
-    var form = [];
-    if(this.props.inputType != "interactions"){
-      form.push(<input type="text" placeholder="Name" ref="inputName" />);
-    }
-    for(var field in this.props.sample){
-      form.push(<input type="text" placeholder={field} ref={field} />);
-    }
-
-    return (
-      <form className="InputForm" onSubmit={this.handleSubmit}>
-        <div>Add {this.props.inputType}</div>
-        {form}
-        <input type="hidden" ref="inputType" value={this.props.inputType} />
-        <input type="submit" value="Post" />
-      </form>
-    );
-  }
-});
-
-
-var Main = React.createClass({
+module.exports = React.createClass({
+  displayName: 'App',
   loadDataFromServer: function() {
     var dataUrl = this.props.url+"/data";
     $.ajax({
@@ -125,11 +88,3 @@ var Main = React.createClass({
     );
   }
 });
-
-React.render(
-  <Main url="" 
-        pollInterval={20000} 
-        components={["InteractionsBox","InsectsBox","PlantsBox"]}
-        numLimit={10} />,
-  document.getElementById('content')
-);

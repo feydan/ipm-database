@@ -1,19 +1,9 @@
-var Plant = React.createClass({
-  render: function() {
-    return (
-      <div className="Plant">
-        <img src={this.props.plantObj.image_url} />
-        <div className="PlantName">
-          {this.props.plantName}
-        </div>
-        <span>
-          {this.props.plantObj.comment}
-        </span>
-      </div>
-    );
-  }
-});
-var PlantsBox = React.createClass({
+var React = require('react');
+var Plant = require('./Plant');
+var InputForm = require('./InputForm');
+
+module.exports = React.createClass({
+  displayName:'PlantsBox',
   render: function() {
     var plants = [];
     var counter = this.props.numLimit ? this.props.numLimit : -1;

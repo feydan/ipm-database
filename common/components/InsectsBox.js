@@ -1,21 +1,9 @@
-var Insect = React.createClass({
-  render: function() {
-    var tmpImg = this.props.insectObj.image_url;
-    return (
-      <span className="Insect">
-        <img src={tmpImg} />
-        <div className="InsectName">
-          {this.props.insectName}
-        </div>
-        <span>
-          {/*this.props.insectObj.comment*/}
-        </span>
-      </span>
-    );
-  }
-});
+var React = require('react');
+var Insect = require('./Insect');
+var InputForm = require('./InputForm');
 
-var InsectsBox = React.createClass({
+module.exports = React.createClass({
+  displayName:'InsectBox',
   render: function() {
     var insects = [];
     var counter = this.props.numLimit ? this.props.numLimit : -1;
