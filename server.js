@@ -42,6 +42,7 @@ app.get('/data', function(req, res) {
 
 var handleInput = function(req, res, inputType){
   /*PUT SOME INPUT VALIDATION HURRR*/
+  console.log(req.body);
   fs.readFile(path+files[inputType], function (err, data) {
     data = JSON.parse(data);
     var inputObj = req.body;

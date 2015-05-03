@@ -36,7 +36,13 @@ var renderedLayout = layoutTemplate({
  * Serving up the rendered template
  */
 var express = require('express');
+var bodyParser = require('body-parser');
+
+
 var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 var path = 'data/example/';
 var files = {
@@ -63,7 +69,7 @@ var handleInput = function(req, res, inputType){
     data = JSON.parse(data);
     var inputObj = req.body;
     if(inputType == "interactions"){
-      data.push([inputObj.data]);
+      data.push(inputObj.data);
     } else {
       data[inputObj.inputName] = inputObj.data;
     }

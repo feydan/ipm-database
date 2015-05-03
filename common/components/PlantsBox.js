@@ -8,8 +8,8 @@ module.exports = React.createClass({
     var plants = [];
     var counter = this.props.numLimit ? this.props.numLimit : -1;
     for(var plantName in this.props.plants){
-      if(counter-- == 0) break;
-      plants.push(<Plant plantName={plantName} plantObj={this.props.plants[plantName]} />);
+      if(counter-- === 0) break;
+      plants.push(<Plant plantName={plantName} plantObj={this.props.plants[plantName]} key={counter} />);
     }
     return (
       <div className="PlantsBox">
@@ -18,6 +18,7 @@ module.exports = React.createClass({
         <InputForm inputType="plants"
                    sample={this.props.plants[Object.keys(this.props.plants)[0]]}
                    onInputSubmit={this.props.onInputSubmit}
+                   key={"plant"}
         />
         <div className="horizontal-line"></div>
       </div>  

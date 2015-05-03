@@ -13,6 +13,7 @@ module.exports = React.createClass({
                    sample={this.props.data.interactions[0]}
                    data={this.props.data}
                    onInputSubmit={this.props.onInputSubmit}
+                   key={"interactions"}
         />
         <div className="horizontal-line"></div>
       </div>

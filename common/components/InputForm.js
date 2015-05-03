@@ -44,7 +44,7 @@ module.exports = React.createClass({
         <div>Add {this.props.inputType}</div>
         {form}
         <input type="hidden" ref="inputType" value={this.props.inputType} />
-        <input type="submit" value="Post" />
+        <input className="ui button" type="submit" value="Post" />
       </form>
     );
   }
