@@ -79,10 +79,11 @@ module.exports = React.createClass({
 
     return(
       <div className="Main">
-        <h1><a data-components="InteractionsBox InsectsBox PlantsBox" data-num-limit="10" onClick={this.handleToggle}>IPM Database</a> |
-            &nbsp;<a data-components="InteractionsBox" data-num-limit="30" onClick={this.handleToggle}>Interactions</a> |
-            &nbsp;<a data-components="InsectsBox" data-num-limit="" onClick={this.handleToggle}>Insects</a> |
-            &nbsp;<a data-components="PlantsBox" data-num-limit="" onClick={this.handleToggle}>Plants</a> </h1>
+        <div className="ui four fluid buttons">
+          <div className="ui big button active" data-components="InteractionsBox InsectsBox PlantsBox" data-num-limit="10" onClick={this.handleToggle}>IPM Database</div>
+          <div className="ui big button" data-components="InteractionsBox" data-num-limit="30" onClick={this.handleToggle}>Interactions</div>
+          <div className="ui big button" data-components="InsectsBox" data-num-limit="" onClick={this.handleToggle}>Insects</div>
+          <div className="ui big button" data-components="PlantsBox" data-num-limit="" onClick={this.handleToggle}>Plants</div> </div>
         {components}
       </div>
     );

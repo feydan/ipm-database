@@ -33,15 +33,15 @@ module.exports = React.createClass({
         for(var index in this.props.data[field+'s']){
           options.push(<option value={index}>{index}</option>);
         }
-        form.push(<select ref={field}>{options}</select>);
+        form.push(<select className={"ui dropdown "+field} ref={field}>{options}</select>);
       }else{
         form.push(<input type="text" placeholder={field} ref={field} />);
       }
     }
 
     return (
-      <form className="InputForm" onSubmit={this.handleSubmit}>
-        <div>Add {this.props.inputType}</div>
+      <form className="InputForm ui left input" onSubmit={this.handleSubmit}>
+        <h4 className="ui header">Add {this.props.inputType}</h4>
         {form}
         <input type="hidden" ref="inputType" value={this.props.inputType} />
         <input className="ui button" type="submit" value="Post" />

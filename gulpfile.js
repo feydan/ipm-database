@@ -26,7 +26,7 @@ gulp.task('lint', ['jsx'], function() {
 //Browserify
 gulp.task('scripts', ['lint','jsx'], function() {
     // Single entry point to browserify 
-    gulp.src('lib/components/App.js')
+    gulp.src('browser/index.js')
         .pipe(browserify({
           insertGlobals : true,
           debug : !gulp.env.production

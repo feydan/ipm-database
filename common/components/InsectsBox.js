@@ -13,7 +13,7 @@ module.exports = React.createClass({
     }
     return (
       <div className="InsectsBox">
-        <h2>Insects</h2>
+        <h2 className="ui header">Insects</h2>
         {insects}
         <InputForm inputType="insects"
                    sample={this.props.insects[Object.keys(this.props.insects)[0]]}
