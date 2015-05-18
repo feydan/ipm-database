@@ -9,18 +9,25 @@ module.exports = React.createClass({
     var counter = this.props.numLimit ? this.props.numLimit : -1;
     for(var plantName in this.props.plants){
       if(counter-- === 0) break;
-      plants.push(<Plant plantName={plantName} plantObj={this.props.plants[plantName]} key={counter} />);
+      plants.push(
+        <div className="column">
+          <Plant plantName={plantName} plantObj={this.props.plants[plantName]} key={counter} />
+        </div>
+      );
     }
     return (
-      <div className="PlantsBox">
-        <h2 className="ui header">Plants</h2>
-        {plants}
+      <div className="ui segment PlantsBox">
+        <div className="ui top large attached label">
+          <i className="leaf icon"></i>Plants ({Object.keys(this.props.plants).length})
+        </div>
+        <div className="ui doubling six column grid">
+          {plants}
+        </div>
         <InputForm inputType="plants"
                    sample={this.props.plants[Object.keys(this.props.plants)[0]]}
                    onInputSubmit={this.props.onInputSubmit}
                    key={"plant"}
         />
-        <div className="horizontal-line"></div>
       </div>  
     );
   }

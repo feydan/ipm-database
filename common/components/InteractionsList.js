@@ -8,21 +8,25 @@ module.exports = React.createClass({
     var insects = this.props.data.insects;
     var interactions = this.props.data.interactions.map(function(interaction, index) {
       return (
-        <Interaction plantName={interaction.plant} 
-                     plantObj={plants[interaction.plant]} 
-                     insectName={interaction.insect} 
-                     insectObj={insects[interaction.insect]} 
-                     relationship={interaction.relationship} 
-                     description={interaction.description} 
-                     source_url={interaction.source_url} 
-                     key={index}>
-        </Interaction>
+        <div className="column">
+          <Interaction plantName={interaction.plant} 
+                       plantObj={plants[interaction.plant]} 
+                       insectName={interaction.insect} 
+                       insectObj={insects[interaction.insect]} 
+                       relationship={interaction.relationship} 
+                       description={interaction.description} 
+                       source_url={interaction.source_url} 
+                       key={index}>
+          </Interaction>
+        </div>
       );
     });
 
     return (
-      <div className="interactionsList">
-        {interactions}
+      <div className="ui grid interactionsList">
+        <div className="doubling two column row">
+          {interactions}
+        </div>
       </div>
     );
   }

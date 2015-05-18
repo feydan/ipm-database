@@ -6,8 +6,8 @@ module.exports = React.createClass({
   displayName: 'InteractionsBox',
   render: function() {
     return (
-      <div className="InteractionsBox">
-        <h2 className="ui header">Interactions</h2>
+      <div className="ui segment InteractionsBox">
+        <div className="ui top large attached label">Interactions ({this.props.data.interactions.length})</div>
         <InteractionsList data={this.props.data} />
         <InputForm inputType="interactions"
                    sample={this.props.data.interactions[0]}
@@ -15,7 +15,6 @@ module.exports = React.createClass({
                    onInputSubmit={this.props.onInputSubmit}
                    key={"interactions"}
         />
-        <div className="horizontal-line"></div>
       </div>
     );
   }

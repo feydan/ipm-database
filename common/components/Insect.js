@@ -6,15 +6,10 @@ module.exports = React.createClass({
   render: function() {
     var tmpImg = this.props.insectObj.image_url;
     return (
-      <span className="Insect">
+      <div className="ui segment Insect">
+        <div className="ui top attached label"><i className="bug icon"></i>{this.props.insectName}</div>
         <img src={tmpImg} />
-        <div className="InsectName">
-          {this.props.insectName}
-        </div>
-        <span>
-          {/*this.props.insectObj.comment*/}
-        </span>
-      </span>
+      </div>
     );
   }
 });
