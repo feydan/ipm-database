@@ -2,19 +2,9 @@
  * Rendering our component server side
  */
 var React = require('react');
-var App = require('../lib/components/App');
-
-// Since we're not using JSX here, we need to wrap the component in a factory
-// manually. See https://gist.github.com/sebmarkbage/ae327f2eda03bf165261
-var AppFactory = React.createFactory(App);
-
-var renderedComponent =  React.renderToString(
-  AppFactory({
-  		url:"", 
-        pollInterval:20000,
-        components:["InteractionsBox","InsectsBox","PlantsBox"],
-        numLimit:10})
-);  
+var Router = require('react-router');
+var routes = require('../lib/components/Routes');
+var ApiUtils = require('../lib/api/ApiUtils');
 
 
 /* ----------
@@ -25,11 +15,6 @@ var fs = require('fs');
 
 var fileData = fs.readFileSync(__dirname + '/templates/layout.handlebars').toString();
 var layoutTemplate = Handlebars.compile(fileData);
-
-var renderedLayout = layoutTemplate({
-  content: renderedComponent
-});
-
 
 
 /* ----------
@@ -86,13 +71,28 @@ app.post('/plants', function(req, res){ handleInput(req, res, 'plants'); });
 app.post('/insects', function(req, res){ handleInput(req, res, 'insects'); });
 app.post('/interactions', function(req, res){ handleInput(req, res, 'interactions'); });
 
-app.get('/', function(req, res) {
-  res.send(renderedLayout);
-});
+// app.get('/', function(req, res) {
+//   res.send(renderedLayout);
+// });
 
 // NOTE: This route is last since we want to match the dynamic routes above
 // first before attempting to match a static resource (js/css/etc)
 app.use(express.static('./public'));
+app.use( function (req, res) {
+  Router.run(routes, req.path, function (Handler) {
+    ApiUtils.getAllData();
+    var HandlerFactory = React.createFactory(Handler);
+    var renderedComponent =  React.renderToString(
+      HandlerFactory({
+          path:req.q
+        })
+    );  
+    var renderedLayout = layoutTemplate({
+      content: renderedComponent
+    });
+    res.send(renderedLayout);
+  });
+});
 
 app.listen(3000, function() {
   console.log("Listening on port 3000");

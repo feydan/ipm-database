@@ -11,9 +11,9 @@ var react = require('gulp-react');
 
 //Compile jsx
 gulp.task('jsx', function () {
-    return gulp.src('common/components/*.js')
+    return gulp.src('common/*/*.js')
         .pipe(react())
-        .pipe(gulp.dest('lib/components'));
+        .pipe(gulp.dest('lib'));
 });
 
 // Lint Task
